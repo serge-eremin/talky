@@ -1,0 +1,22 @@
+{
+  "name": "talky-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm i --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serge-eremin/talky.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serge-eremin/talky/issues"
+  },
+  "homepage": "https://github.com/serge-eremin/talky#readme"
+}

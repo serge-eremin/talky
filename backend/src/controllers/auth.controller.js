@@ -1,7 +1,9 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import { ENV } from "../lib/env.js";
 
 import { generateToken } from "../lib/utils.js";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -31,20 +33,29 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      fullName,
-      email,
+      fullName: fullName.trim(),
+      email: email.toLowerCase(),
       password: hashedPassword,
     });
 
     if (newUser) {
-      generateToken(newUser._id, res);
-      await newUser.save();
+      const savedUser = await newUser.save();
+      generateToken(savedUser._id, res);
 
       res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        profilePic: newUser.profilePic,
+        _id: savedUser._id,
+        fullName: savedUser.fullName,
+        email: savedUser.email,
+        profilePic: savedUser.profilePic,
+      });
+
+      // Fire-and-forget; do not delay response on email latency
+      sendWelcomeEmail(
+        savedUser.email,
+        savedUser.fullName,
+        ENV.CLIENT_URL,
+      ).catch((error) => {
+        console.error("Failed to send welcome email: ", error);
       });
     } else {
       res.status(400).json({ message: "Invalid user data" });

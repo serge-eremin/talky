@@ -3,7 +3,7 @@ import { createWelcomeEmailTemplate } from "../emails/emailTemplates.js";
 
 export const sendWelcomeEmail = async (email, name, clientURL) => {
   const { data, error } = await resendClient.emails.send({
-    from: `${sender.name} <${sender.email}>`,
+    from: `${sender?.name} <${sender?.email}>`,
     to: email,
     subject: "Welcome to Talky",
     html: createWelcomeEmailTemplate(name, clientURL),

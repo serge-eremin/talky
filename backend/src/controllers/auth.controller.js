@@ -49,15 +49,14 @@ export const signup = async (req, res) => {
         profilePic: savedUser.profilePic,
       });
 
-      try {
-        await sendWelcomeEmail(
-          savedUser.email,
-          savedUser.fullName,
-          ENV.CLIENT_URL,
-        );
-      } catch (error) {
+      // Fire-and-forget; do not delay response on email latency
+      sendWelcomeEmail(
+        savedUser.email,
+        savedUser.fullName,
+        ENV.CLIENT_URL,
+      ).catch((error) => {
         console.error("Failed to send welcome email: ", error);
-      }
+      });
     } else {
       res.status(400).json({ message: "Invalid user data" });
     }

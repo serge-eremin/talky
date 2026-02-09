@@ -9,14 +9,26 @@ const messageSchema = new mongoose.Schema(
     },
     receiverId: {
       type: mongoose.Schema.Types.ObjectId,
-      reg: "User",
+      ref: "User",
       required: true,
     },
-    text: { type: String },
+    text: { type: String, trim: true, maxlength: 2000 },
     image: { type: String },
   },
   { timestamps: true },
 );
+
+// // Optimize frequent queries
+// messageSchema.index({senderId:1, receiverId: 1, createdAt: -1})
+// messageSchema.index({receiverId:1, senderId: 1, createdAt: -1})
+
+// // Require at least one of text or image
+// messageSchema.pre("validate", function (next) {
+//   if (!this.text && !this.image) {
+//     return next(new error("Either taxt or image is require"));
+//   }
+//   next();
+// });
 
 const Message = mongoose.model("Message", messageSchema);
 

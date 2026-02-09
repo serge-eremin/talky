@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { ENV } from "../lib/env.js";
 
-export const protectRoute = (req, res, next) => {
+export const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
-    console.log("RouteToken->:", req.cookies);
+
     if (!token) {
       return res
         .status(401)
@@ -17,15 +17,16 @@ export const protectRoute = (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized - Invalid token" });
     }
 
-    const user = User.findById(decoded.userId).select(-password);
+    const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
     req.user = user;
+
     next();
   } catch (error) {
-    console.log("Error in protestRoute middleware", error);
+    console.log("Error in protectRoute middleware", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

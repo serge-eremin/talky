@@ -4,6 +4,7 @@ import {
   UserIcon,
   MailIcon,
   LoaderIcon,
+  LockIcon,
 } from "lucide-react";
 import { Link } from "react-router";
 
@@ -88,7 +89,7 @@ export const SignUpPage = () => {
                   <div>
                     <label className="auth-input-label">Password</label>
                     <div className="relative">
-                      <MailIcon className="auth-input-icon" />
+                      <LockIcon className="auth-input-icon" />
 
                       <input
                         type="password"

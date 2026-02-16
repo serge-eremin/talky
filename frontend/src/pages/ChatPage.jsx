@@ -9,11 +9,11 @@ import { ContactList } from "../components/ContactList";
 import { ChatContainer } from "../components/ChatContainer";
 import { NoConversationPlaceholder } from "../components/NoConversationPlaceholder";
 
-function ChatPage() {
+export const ChatPage = () => {
   const { activeTab, selectedUser } = useChatStore();
 
   return (
-    <div className="relative w-full max-w-6xl h-140 text-white/60">
+    <div className="relative w-full max-w-6xl h-140">
       <BorderAnimatedContainer>
         {/* LEFT SIDE */}
         <div className="w-80 bg-slate-800/50 backdrop-blur-sm flex flex-col">
@@ -32,7 +32,4 @@ function ChatPage() {
       </BorderAnimatedContainer>
     </div>
   );
-}
-
-export default ChatPage;
-// w-full h-screen flex items-center justify-center
+};

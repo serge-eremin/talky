@@ -11,10 +11,10 @@ export const useChatStore = create((set, get) => ({
   selectedUser: null,
   areUsersLoading: false,
   areMessagesLoading: false,
-  isSoundEnabled: localStorage.getItem("isSoundEnabled") === true,
+  isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled")) === true,
 
   toggleSound: () => {
-    localStorage.setItems("isSoundEnabled", !get().isSoundEnabled);
+    localStorage.setItem("isSoundEnabled", !get().isSoundEnabled);
     set({ isSoundEnabled: !get().isSoundEnabled });
   },
 
@@ -25,7 +25,7 @@ export const useChatStore = create((set, get) => ({
     set({ areUsersLoading: true });
     try {
       const res = await axiosInstance.get("/messages/contacts");
-      set({ allConracts: res?.data || [] });
+      set({ allContacts: res?.data || [] });
     } catch (error) {
       toast.error(error.response?.data?.message || "Get all contacts failed");
     } finally {

@@ -1,5 +1,5 @@
 import React from "react";
 
 export const ChatContainer = () => {
-  return <div>ChatContainer</div>;
+  return <div className="text-white">ChatContainer</div>;
 };

@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 import { SignUpPage } from "./pages/SignUpPage";
 import { LoginPage } from "./pages/LoginPage";
-import ChatPage from "./pages/ChatPage";
+import { ChatPage } from "./pages/ChatPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { PageLoader } from "./components/PageLoader";
 

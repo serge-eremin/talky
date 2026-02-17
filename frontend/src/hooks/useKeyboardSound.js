@@ -17,7 +17,7 @@ function useKeyboardSound() {
     randomSound.currentTime = 0;
     randomSound
       .play()
-      .catch((error) => console.log("Audio paly failed", error));
+      .catch((error) => console.log("Audio play failed", error));
   };
 
   return { playRandomKeyStrokeSound };

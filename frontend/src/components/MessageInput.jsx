@@ -38,7 +38,7 @@ export const MessageInput = () => {
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file.type.startsWith("image/")) {
       toast.error("Please select an image file");
       return;
@@ -56,7 +56,7 @@ export const MessageInput = () => {
       // return (fileInputRef.current.value = "");
     }
   };
-  console.log("text-:", text);
+
   return (
     <div className="p-4 border-t border-slate-700/50">
       {imagePreview ? (

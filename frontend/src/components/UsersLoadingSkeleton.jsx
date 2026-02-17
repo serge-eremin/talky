@@ -1,6 +1,6 @@
 import React from "react";
 
-export const UsersLoadingSceleton = () => {
+export const UsersLoadingSkeleton = () => {
   return (
     <div className="space-y-2">
       {[1, 2, 3].map((item) => (
@@ -12,7 +12,7 @@ export const UsersLoadingSceleton = () => {
             <div className="w-12 h-12 bg-slate-700 rounded-full"></div>
             <div className="flex-1">
               <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
-              <div className="h-3 bg-slate-700/70 rounded max-w-10/12"></div>
+              <div className="h-3 bg-slate-700/70 rounded w-10/12"></div>
             </div>
           </div>
         </div>

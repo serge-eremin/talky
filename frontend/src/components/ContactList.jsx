@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useChatStore } from "../store/useChatStore";
-import { UsersLoadingSceleton } from "./UsersLoadingSceleton";
+import { UsersLoadingSkeleton } from "./UsersLoadingSkeleton";
 
 export const ContactList = () => {
   const { getAllContacts, allContacts, setSelectedUser, areUsersLoading } =
@@ -12,7 +12,7 @@ export const ContactList = () => {
   }, [getAllContacts]);
 
   if (areUsersLoading) {
-    return <UsersLoadingSceleton />;
+    return <UsersLoadingSkeleton />;
   }
 
   return (
@@ -30,7 +30,7 @@ export const ContactList = () => {
                 <div className="size-12 rounded-full">
                   <img
                     src={contact.profilePic || "/avatar.png"}
-                    // alt={contact.fullName}
+                    alt={contact.fullName}
                   />
                 </div>
               </div>

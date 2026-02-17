@@ -41,10 +41,22 @@ export const useChatStore = create((set, get) => ({
       set({ chats: res?.data || [] });
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Get my chat partnerss failed",
+        error.response?.data?.message || "Get my chat partners failed",
       );
     } finally {
       set({ areUsersLoading: false });
+    }
+  },
+
+  getMessagesByUserId: async (userId) => {
+    set({ areMessagesLoading: true });
+    try {
+      const res = await axiosInstance.get(`/messages/${userId}`);
+      set({ messages: res.data });
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      set({ areMessagesLoading: false });
     }
   },
 }));

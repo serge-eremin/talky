@@ -16,7 +16,7 @@ export const ChatHeader = () => {
     window.addEventListener("keydown", handleEscapeKey);
 
     //cleanup function
-    () => window.addEventListener("keydown", handleEscapeKey);
+    () => window.removeEventListener("keydown", handleEscapeKey);
   }, [setSelectedUser]);
 
   return (

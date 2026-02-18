@@ -8,8 +8,9 @@ import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
+import { app, server } from "./lib/socket.js";
 
-const app = express();
+// const app = express(); // we deleting app because we imported app from socket
 
 const __dirname = path.resolve();
 
@@ -32,7 +33,8 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => {
+// app.listen(PORT, () => { // because imported from socket
+server.listen(PORT, () => {
   console.log(`Server is running on localhost:${PORT}`);
   connectDB();
 });

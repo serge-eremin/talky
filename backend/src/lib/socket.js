@@ -16,6 +16,26 @@ const io = new Server(server, {
 // apply authentification middleware to all socket connections
 io.use(socketAuthMiddleware);
 
+// we will use this function to check if the user online or not
+// export function getReceiverSocketId(userId) {
+//   return userSocketMap[userId];
+// }
+//===========
+// export function getReceiverSocketId(userId) {
+//   const sockets = userSocketMap.get(userId);
+//   if (!sockets || sockets.size === 0) {
+//     return null;
+//   }
+
+//   return [...sockets][0]; // берем первый сокет
+// }
+
+//======= for chats ==
+export function getReceiverSocketIds(userId) {
+  return userSocketMap.get(userId) ?? new Set();
+}
+// ================
+
 // ===== start this section: - handling online and ofline users=====
 // this is for storing online users
 /*

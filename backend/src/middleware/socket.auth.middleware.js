@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import cookie from "cookie";
 
 import User from "../models/User.js";
 import { ENV } from "../lib/env.js";
@@ -7,9 +8,8 @@ export const socketAuthMiddleware = async (socket, next) => {
   try {
     //extract token from http-only cookies
     const token = socket.handshake.headers.cookie
-      ?.split("; ")
-      .find((row) => row.startsWith("jwt="))
-      ?.split("=")[1];
+      ? cookie.parse(socket.handshake.headers.cookie).jwt
+      : undefined;
 
     if (!token) {
       console.log(`Socket connection rejected: No token provided`);
